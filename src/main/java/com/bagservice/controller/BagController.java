@@ -25,7 +25,7 @@ public class BagController implements BagServiceApi {
 
     @Override
     public ResponseEntity<PickupBookingResponse> createPickupBooking(@Valid PickupBookingRequest request) {
-        log.info("Creating pickup booking for bag tag: {}", request.getBagTag());
+        log.info("Creating pickup booking for passenger: {} for bags: {}", request.getContactName(), request.getBags());
         PickupBookingResponse response = bagService.createPickupBooking(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

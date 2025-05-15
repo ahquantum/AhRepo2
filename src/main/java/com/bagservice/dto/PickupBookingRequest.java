@@ -9,8 +9,10 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * DTO for pickup booking request
@@ -21,10 +23,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PickupBookingRequest {
     
-    @NotBlank(message = "Bag tag is required")
-    @Size(min = 10, max = 10, message = "Bag tag must be exactly 10 digits")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Bag tag must be a 10-digit number")
-    private String bagTag;
+    @NotBlank(message = "Contact name is required")
+    private String contactName;
+    
+    @NotBlank(message = "Contact email is required")
+    @Email(message = "Invalid email format")
+    private String contactEmail;
+    
+    @NotBlank(message = "Contact phone number is required")
+    @Pattern(regexp = "^[0-9+\\-\\s]+$", message = "Invalid phone number format")
+    private String contactPhone;
+    
+    private List<BagDTO> bags;
     
     @NotBlank(message = "Pickup location is required")
     private String pickupLocation;
@@ -33,9 +43,10 @@ public class PickupBookingRequest {
     @Future(message = "Pickup time must be in the future")
     private LocalDateTime pickupTime;
     
-    @NotBlank(message = "Contact phone number is required")
-    @Pattern(regexp = "^[0-9+\\-\\s]+$", message = "Invalid phone number format")
-    private String contactPhone;
-    
     private String specialInstructions;
+
+    // @NotBlank(message = "Bag tag is required")
+    // @Size(min = 10, max = 10, message = "Bag tag must be exactly 10 digits")
+    // @Pattern(regexp = "^[0-9]{10}$", message = "Bag tag must be a 10-digit number")
+    // private String bagTag;
 } 
