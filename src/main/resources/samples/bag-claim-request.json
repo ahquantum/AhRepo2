@@ -1,0 +1,12 @@
+{
+  "bagTag": "1234567890",
+  "passengerName": "John Smith",
+  "flightNumber": "BA456",
+  "flightDate": "2023-08-20",
+  "airline": "British Airways",
+  "origin": "London Heathrow",
+  "destination": "New York JFK",
+  "claimAmount": 1200.00,
+  "reason": "Lost Bag",
+  "description": "Bag did not arrive at destination carousel. Lost bag report filed with airline."
+} 

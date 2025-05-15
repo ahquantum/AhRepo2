@@ -1,0 +1,11 @@
+{
+  "weight": 23.5,
+  "length": 65.0,
+  "width": 45.0,
+  "height": 25.0,
+  "flightNumber": "BA456",
+  "flightDate": "2023-08-20",
+  "airline": "British Airways",
+  "origin": "London Heathrow",
+  "destination": "New York JFK"
+} 

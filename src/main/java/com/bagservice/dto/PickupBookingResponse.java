@@ -1,0 +1,29 @@
+package com.bagservice.dto;
+
+import com.bagservice.model.BookingStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+/**
+ * DTO for pickup booking response
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PickupBookingResponse {
+    
+    private Long id;
+    private String bagTag;
+    private String pickupLocation;
+    private LocalDateTime pickupTime;
+    private String contactPhone;
+    private String specialInstructions;
+    private BookingStatus status;
+    private LocalDateTime createdAt;
+    private String message;
+} 
