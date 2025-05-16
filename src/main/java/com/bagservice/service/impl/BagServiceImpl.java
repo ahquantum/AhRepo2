@@ -37,8 +37,38 @@ public class BagServiceImpl implements BagService {
         log.info("Creating pickup booking for bag tag: {}", request.getBagTag());
         
         // Find bag by tag
-        Bag bag = bagRepository.findByBagTag(request.getBagTag())
-                .orElseThrow(() -> new RuntimeException("Bag not found with tag: " + request.getBagTag()));
+        Optional<Bag> bagOptional = bagRepository.findByBagTag(request.getBagTag());
+
+        Bag bag;
+        if (!bagOptional.isPresent()) {
+            // create a new bag
+            log.info("Bag not found with tag {}, creating new bag", request.getBagTag());
+            
+            // Validate the bag creation fields
+            if (request.getFlightNumber() == null || request.getFlightDate() == null || 
+                request.getAirline() == null || request.getOrigin() == null || request.getDestination() == null) {
+                throw new RuntimeException("Missing required bag information for creating a new bag");
+            }
+            
+            bag = Bag.builder()
+                .bagTag(request.getBagTag())
+                .status(BagStatus.AVAILABLE)
+                .passengerName(request.getContactName())
+                .flightNumber(request.getFlightNumber())
+                .flightDate(request.getFlightDate())
+                .airline(request.getAirline())
+                .origin(request.getOrigin())
+                .destination(request.getDestination())
+                .weight(request.getWeight() != null ? request.getWeight() : 0.0) // Default to 0 if not provided
+                .length(request.getLength() != null ? request.getLength() : 0.0)
+                .width(request.getWidth() != null ? request.getWidth() : 0.0)
+                .height(request.getHeight() != null ? request.getHeight() : 0.0)
+                .build();
+            bagRepository.save(bag);
+            log.info("Created new bag with ID: {}", bag.getId());
+        } else {
+            bag = bagOptional.get();
+        }
         
         // Create pickup booking
         PickupBooking booking = PickupBooking.builder()

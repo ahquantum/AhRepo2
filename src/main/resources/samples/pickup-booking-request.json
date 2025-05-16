@@ -1,7 +1,14 @@
 {
-  "bagTag": "1234567890",
-  "pickupLocation": "Terminal 3, Door 5, Arrivals Hall",
-  "pickupTime": "2023-08-15T14:30:00",
-  "contactPhone": "+1-555-123-4567",
-  "specialInstructions": "Large red suitcase with black stripes"
-} 
+	"bagTag": "0086100100",
+	"contactName": "John Smith",
+	"contactEmail": "jsmith@gmail.com",
+	"contactPhone": "01234567890",
+	"pickupLocation": "34 South Street, High Wycombe, HP12 3PX",
+	"pickupTime": "2025-06-18T14:30:00",
+	"specialInstructions": "Large red suitcase with black stripes",
+	"flightNumber": "NZ100",
+	"flightDate": "2025-06-18",
+	"airline": "Air New Zealand",
+	"origin": "LHR",
+	"destination": "AKL"
+}

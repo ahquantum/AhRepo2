@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,13 +25,15 @@ public class BagController implements BagServiceApi {
     private final BagService bagService;
 
     @Override
+    @PostMapping("/pickup")
     public ResponseEntity<PickupBookingResponse> createPickupBooking(@Valid PickupBookingRequest request) {
-        log.info("Creating pickup booking for passenger: {} for bags: {}", request.getContactName(), request.getBags());
+        log.info("Creating pickup booking for passenger: {} for bag: {}", request.getContactName(), request.getBagTag());
         PickupBookingResponse response = bagService.createPickupBooking(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Override
+    @PostMapping("/dropoff")
     public ResponseEntity<DropoffBookingResponse> createDropoffBooking(@Valid DropoffBookingRequest request) {
         log.info("Creating dropoff booking for bag tag: {}", request.getBagTag());
         DropoffBookingResponse response = bagService.createDropoffBooking(request);
@@ -38,6 +41,7 @@ public class BagController implements BagServiceApi {
     }
 
     @Override
+    @PostMapping("/track")
     public ResponseEntity<TrackBagResponse> trackBag(@Valid TrackBagRequest request) {
         log.info("Tracking bag with tag: {}", request.getBagTag());
         TrackBagResponse response = bagService.trackBag(request);
@@ -45,6 +49,7 @@ public class BagController implements BagServiceApi {
     }
 
     @Override
+    @PostMapping("/insurance/quote")
     public ResponseEntity<BagInsuranceQuoteResponse> bagInsuranceQuote(@Valid BagInsuranceQuoteRequest request) {
         log.info("Generating insurance quote for bag");
         BagInsuranceQuoteResponse response = bagService.bagInsuranceQuote(request);
@@ -52,6 +57,7 @@ public class BagController implements BagServiceApi {
     }
 
     @Override
+    @PostMapping("/insurance/insure")
     public ResponseEntity<BagInsureResponse> bagInsure(@Valid BagInsureRequest request) {
         log.info("Insuring bag with tag: {}", request.getBagTag());
         BagInsureResponse response = bagService.bagInsure(request);
@@ -59,6 +65,7 @@ public class BagController implements BagServiceApi {
     }
 
     @Override
+    @PostMapping("/insurance/claim")
     public ResponseEntity<BagClaimResponse> bagClaim(@Valid BagClaimRequest request) {
         log.info("Processing claim for bag with tag: {}", 
                 request.getBagTag() != null ? request.getBagTag() : "unknown");
